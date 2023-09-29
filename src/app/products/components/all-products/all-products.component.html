@@ -1,0 +1,20 @@
+<div class="box mt-5">
+    <div class="images">
+        <carousel [interval]="4000" class="img">
+            <slide *ngFor="let image of images" >
+                <img [src]="image.url" alt="{{image.alt}}" class="cc">
+            </slide>
+        </carousel>
+    </div>
+    <div>
+        <app-select [data]="categories" [title]="'Categories'" (selectedValue)="filterCategory($event)"></app-select>
+    </div>
+    <div class="row" *ngIf="!loading">
+        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let item of products">
+            <app-product [data]="item" (item)="addToCart($event)"></app-product>
+        </div>
+    </div>
+    <div class="text-center w-100" *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+</div>
